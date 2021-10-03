@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="threeFourData"
+            type="com.ngb.kotlindemo.main.second.homepage.fragment.two.TemplateData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp">
+
+        <ImageView
+            android:id="@+id/image_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:src="@{threeFourData.component10()}"
+            app:layout_constraintDimensionRatio="h,3:4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@{threeFourData.component3()}"
+            app:layout_constraintStart_toStartOf="@id/image_view"
+            app:layout_constraintTop_toBottomOf="@id/image_view" />
+
+        <TextView
+            android:id="@+id/text_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@{threeFourData.component8() + `喜欢`}"
+            app:layout_constraintStart_toStartOf="@id/title_text"
+            app:layout_constraintTop_toBottomOf="@id/title_text" />
+
+        <ImageView
+            android:id="@+id/user_header"
+            android:layout_width="30dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:src="@{threeFourData.component11()}"
+            app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintStart_toStartOf="@id/text_like"
+            app:layout_constraintTop_toBottomOf="@id/text_like" />
+
+        <TextView
+            android:id="@+id/author_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@{threeFourData.component5()}"
+            app:layout_constraintBottom_toBottomOf="@id/user_header"
+            app:layout_constraintStart_toEndOf="@id/user_header"
+            app:layout_constraintTop_toTopOf="@id/user_header" />
+
+
+        <TextView
+            android:id="@+id/part_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="@{threeFourData.component7() + `个片段`}"
+            app:layout_constraintBottom_toBottomOf="@id/image_view"
+            app:layout_constraintStart_toStartOf="@id/image_view" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
