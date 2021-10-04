@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ngb.kotlindemo.main.R
 import com.ngb.kotlindemo.main.second.homepage.fragment.two.holder.*
 
-class PageTwoAdapter(list: MutableList<TemplateData>) : RecyclerView.Adapter<TemplateViewHolder>() {
-    private val mTemplateList = list
+class PageTwoAdapter() : RecyclerView.Adapter<TemplateViewHolder>() {
+    private val mTemplateList = mutableListOf<TemplateData>()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -127,5 +127,15 @@ class PageTwoAdapter(list: MutableList<TemplateData>) : RecyclerView.Adapter<Tem
     fun addTemplateData(data: TemplateData, index: Int = mTemplateList.size) {
         mTemplateList.add(index, data)
         notifyItemInserted(index)
+    }
+
+    fun removeData(index: Int) {
+        mTemplateList.removeAt(index)
+        notifyItemRemoved(index)
+    }
+
+    fun removeDataAll() {
+        mTemplateList.clear()
+        notifyDataSetChanged()
     }
 }
