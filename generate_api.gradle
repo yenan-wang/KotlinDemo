@@ -1,0 +1,47 @@
+task createModuleApi(dependsOn: ['assembleDebug'], type: Jar) {
+    def moduleName = project.name
+    println("creating $moduleName api jar...")
+    archiveBaseName = "$moduleName-api"
+    version("1.0.0")
+    archiveExtension = "jar"
+    //模块实现独立运行时，需要使用if分支语句，非独立运行时，需要使用else分支语句
+    /*if (moduleName == project.ext.isRunAlone) {
+        android.applicationVariants.all {
+            variant ->
+                def kotlinClassPath = project.buildDir.absolutePath + "\\tmp\\kotlin-classes\\" + variant.name
+                println("create kotlin api Jar...$kotlinClassPath")
+                from(
+                        variant.javaCompileProvider.get().destinationDir.getPath(),
+                        kotlinClassPath
+                )
+        }
+    } else {*/
+        android.libraryVariants.all {
+            variant ->
+                def kotlinClassPath = project.buildDir.absolutePath + "\\tmp\\kotlin-classes\\" + variant.name
+                println("create kotlin api Jar...$kotlinClassPath")
+                from(
+                        variant.javaCompileProvider.get().destinationDir.getPath(),
+                        kotlinClassPath
+                )
+        }
+    //}
+    include("com/ngb/kotlindemo/$moduleName/_api/**")
+    include("com/ngb/kotlindemo/$moduleName/_pojo/**")
+    destinationDirectory = file("build/_api")
+}
+
+publishing {
+    def moduleName = project.name
+    publications {
+        "$moduleName"(MavenPublication) {
+            artifact createModuleApi
+            groupId "com.ngb.kotlindemo.$moduleName"
+            artifactId "$moduleName-api"
+            version "1.0.0"
+        }
+    }
+    repositories {
+        maven { url uri("../repo") }
+    }
+}
